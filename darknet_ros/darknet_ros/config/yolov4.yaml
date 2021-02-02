@@ -1,0 +1,14 @@
+yolo_model:
+
+  config_file:
+    name: yolov4-changsha-4car.cfg
+  weight_file:
+    name: yolov4-changsha-4car.weights
+  threshold:
+    value: 0.3
+  detection_classes:
+    names:
+      - PAJERO
+      - HONGQI
+      - EDGE
+      - TANG

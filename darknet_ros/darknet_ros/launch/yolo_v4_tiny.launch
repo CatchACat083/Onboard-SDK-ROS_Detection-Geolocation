@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Use YOLOv3 -->
+	<arg name="network_param_file" default="$(find darknet_ros)/config/yolov4-tiny.yaml"/>
+	<arg name="image" default="/master/vehicle_node/dji_osdk_ros/main_camera_images" />
+  <!-- Include main launch file -->
+	<include file="$(find darknet_ros)/launch/darknet_ros.launch">
+		<arg name="network_param_file" value="$(arg network_param_file)"/>
+		<arg name="image" value="$(arg image)"/>
+	</include>
+</launch>

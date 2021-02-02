@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<launch>
+	<group ns="matrice_01">
+        <arg name="image" default="/matrice_01/vehicle_node/dji_osdk_ros/main_camera_images" />
+        <!-- Config and weights folder. -->
+        <arg name="yolo_weights_path"          default="$(find darknet_ros)/yolo_network_config/weights"/>
+        <arg name="yolo_config_path"           default="$(find darknet_ros)/yolo_network_config/cfg"/>
+        <!-- ROS and network parameter files -->
+        <arg name="network_param_file"         default="$(find darknet_ros)/config/yolov4-tiny.yaml"/>
+        <!-- Load parameters -->
+        <rosparam command="load" ns="darknet_ros" file="$(arg network_param_file)"/>
+        <!-- Start darknet and ros wrapper -->
+        <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" output="screen">
+            <param name="subscribers/camera_reading/topic" 			type="string"	value="/matrice_01/vehicle_node/dji_osdk_ros/main_camera_images" />
+			<param name="subscribers/camera_reading/queue_size" 	type="string"	value="/matrice_01/vehicle_node/dji_osdk_ros/main_camera_images" />
+			
+			<param name="actions/camera_reading/name" 				type="string"	value="check_for_objects" />
+			
+			<param name="publishers/publishers/topic" 				type="string"	value="found_object" />
+			<param name="publishers/publishers/queue_size" 			type="int"		value="1" />
+			<param name="publishers/publishers/latch" 				type="bool"		value="false" />
+
+			<param name="publishers/bounding_boxes/topic" 			type="string"	value="bounding_boxes" />
+			<param name="publishers/bounding_boxes/queue_size" 		type="int"		value="1" />
+			<param name="publishers/bounding_boxes/latch" 			type="bool"		value="false" />
+
+			<param name="publishers/detection_image/topic" 			type="string"	value="detection_image" />
+			<param name="publishers/detection_image/queue_size" 	type="int"		value="1" />
+			<param name="publishers/detection_image/latch" 			type="bool"		value="true" />
+
+			<param name="image_view/enable_opencv" 					type="bool"		value="true" />
+			<param name="image_view/wait_key_delay" 				type="int"		value="1" />
+			<param name="image_view/enable_console_output" 			type="bool"		value="true" />
+
+
+			<param name="weights_path"          value="$(arg yolo_weights_path)" />
+            <param name="config_path"           value="$(arg yolo_config_path)" />
+
+        </node>
+	</group>
+</launch>
+
+
+

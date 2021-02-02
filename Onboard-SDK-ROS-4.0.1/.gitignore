@@ -1,0 +1,7 @@
+./CMakeLists.txt
+*.swn
+*.swo
+*.swp
+*sdk.launch
+build.sh
+.idea/

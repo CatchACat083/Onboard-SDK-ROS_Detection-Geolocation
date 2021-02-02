@@ -1,0 +1,48 @@
+<launch>
+    <group ns="master">
+        <!-- LAUNCH dji_vehicle_node -->
+        <node pkg="dji_osdk_ros" type="dji_vehicle_node" name="vehicle_node" output="screen">
+            <!-- node parameters -->
+            <param name="acm_name" type="string" value="/dev/ttyACM0"/>
+            <param name="serial_name" type="string" value="/dev/ttyUSB0"/>
+            <param name="baud_rate" type="int" value="921600"/>
+            <param name="app_id" type="int" value="12345"/>
+            <param name="app_version" type="int" value="1"/>
+            <param name="align_time" type="bool" value="false"/>
+            <param name="enc_key" type="string" value="abc123"/>
+            <param name="use_broadcast" type="bool" value="false"/>
+        </node>
+
+        <!-- delay for 15.0 seconds -->
+        <arg name="node_start_delay" default="10.0" /> 
+        <!-- LAUNCH my_camera_stream_node -->
+        <node pkg="dji_osdk_ros" type="my_camera_stream_node" name="camera_node" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' "/>
+
+
+        <!-- LAUNCH darknet_ros -->
+        <!-- Console launch prefix -->
+        <arg name="node_start_delay_2" default="20.0" />
+        <arg name="image" default="vehicle_node/dji_osdk_ros/main_camera_images" />
+        <!-- Config and weights folder. -->
+        <arg name="yolo_weights_path"          default="$(find darknet_ros)/yolo_network_config/weights"/>
+        <arg name="yolo_config_path"           default="$(find darknet_ros)/yolo_network_config/cfg"/>
+        <!-- ROS and network parameter files -->
+        <arg name="ros_param_file"             default="$(find darknet_ros)/config/ros.yaml"/>
+        <arg name="network_param_file"         default="$(find darknet_ros)/config/yolov4-tiny.yaml"/>
+        <!-- Load parameters -->
+        <rosparam command="load" ns="darknet_ros" file="$(arg ros_param_file)"/>
+        <rosparam command="load" ns="darknet_ros" file="$(arg network_param_file)"/>
+        <!-- Start darknet and ros wrapper -->
+        <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay_2); $0 $@' ">
+            <param name="weights_path"          value="$(arg yolo_weights_path)" />
+            <param name="config_path"           value="$(arg yolo_config_path)" />
+            <remap from="camera/rgb/image_raw"  to="$(arg image)" />
+        </node>
+
+        <!-- LAUNCH drone_info_sync_node -->
+        <arg name="node_start_delay_3" default="50.0" /> 
+        <!-- LAUNCH my_camera_stream_node -->
+        <node pkg="dji_osdk_ros" type="my_drone_info_sync_node" name="info_sync_node" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay_3); $0 $@' "/>
+
+    </group>
+</launch>

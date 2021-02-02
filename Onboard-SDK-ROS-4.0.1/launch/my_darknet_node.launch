@@ -1,0 +1,26 @@
+<launch>
+    <group ns="master">
+
+        <!-- delay for 15.0 seconds -->
+        <arg name="node_start_delay" default="15.0" /> 
+        <!-- LAUNCH darknet_ros -->
+        <!-- Console launch prefix -->
+        <arg name="image" default="vehicle_node/dji_osdk_ros/main_camera_images" />
+        <!-- Config and weights folder. -->
+        <arg name="yolo_weights_path"          default="$(find darknet_ros)/yolo_network_config/weights"/>
+        <arg name="yolo_config_path"           default="$(find darknet_ros)/yolo_network_config/cfg"/>
+        <!-- ROS and network parameter files -->
+        <arg name="ros_param_file"             default="$(find darknet_ros)/config/ros.yaml"/>
+        <arg name="network_param_file"         default="$(find darknet_ros)/config/yolov4-tiny.yaml"/>
+        <!-- Load parameters -->
+        <rosparam command="load" ns="darknet_ros" file="$(arg ros_param_file)"/>
+        <rosparam command="load" ns="darknet_ros" file="$(arg network_param_file)"/>
+        <!-- Start darknet and ros wrapper -->
+        <node pkg="darknet_ros" type="darknet_ros" name="darknet_ros" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
+            <param name="weights_path"          value="$(arg yolo_weights_path)" />
+            <param name="config_path"           value="$(arg yolo_config_path)" />
+            <remap from="camera/rgb/image_raw"  to="$(arg image)" />
+        </node>
+
+    </group>
+</launch>
