@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="drone_pose_estimation" type="three_drone_position_fusion" name="position_fusion" output="screen">
+        <!-- node parameters -->
+		<param name="enable_console_output"  type="bool" value="true" />
+		<param name="enable_rostopic_output" type="bool" value="true" />
+
+		<param name="drone_01_state_string" type="string" value="/matrice_01_calculator/ground_state" />
+		<param name="drone_02_state_string" type="string" value="/matrice_02_calculator/ground_state" />
+        <param name="drone_03_state_string" type="string" value="/matrice_03_calculator/ground_state" />
+		<param name="ground_target_state_ros_topic" type="string" value="ground_state" />
+    </node>
+</launch>

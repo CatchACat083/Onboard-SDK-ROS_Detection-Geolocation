@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<launch>
+    <!--MATRICE_01-->
+	<node pkg="drone_pose_estimation" type="double_drone_position_calculator" name="matrice_01_calculator" output="screen">
+        <!-- node parameters -->
+		<param name="enable_console_output"  type="bool" value="true" />
+		<param name="enable_rostopic_output" type="bool" value="true" />
+
+		<param name="master_state_ros_topic"  type="string" value="/matrice_01/info_sync_node/drone_state" />
+		<param name="slaver_state_ros_topic" type="string" value="/matrice_02/info_sync_node/drone_state" />
+		<param name="ground_target_state_ros_topic_" type="string" value="ground_state" />
+
+        <!-- camera intrinsic parameters : DJI X5S-->
+		<param name="m_camera_f" type="double" value="0.014722156" />
+    		<param name="m_camera_u0" type="double" value="640.0" />
+    		<param name="m_camera_v0" type="double" value="360.0" />
+		<param name="s_camera_f" type="double" value="0.014722156" />
+    		<param name="s_camera_u0" type="double" value="640.0" />
+    		<param name="s_camera_v0" type="double" value="360.0" />
+
+		<!-- camera distortion parameters : DJI X5S-->
+		<param name="m_camera_k1" type="double" value="-0.047904824" />
+    		<param name="m_camera_k2" type="double" value="0.0393172992" />
+    		<param name="m_camera_p1" type="double" value="0.0" />
+    		<param name="m_camera_p2" type="double" value="0.0" />
+		<param name="s_camera_k1" type="double" value="-0.047904824" />
+    		<param name="s_camera_k2" type="double" value="0.0393172992" />
+    		<param name="s_camera_p1" type="double" value="0.0" />
+    		<param name="s_camera_p2" type="double" value="0.0" />
+
+		<!-- car-GPS to car euler angles (rad) -->
+		<param name="carGPS_car_roll" type="double" value="0.0" />
+    		<param name="carGPS_car_pitch" type="double" value="0.0" />
+    		<param name="carGPS_car_yaw" type="double" value="0.0" />
+		<!-- car-GPS to car translation (m)-->
+		<param name="carGPS_car_x" type="double" value="0.0" />
+    		<param name="carGPS_car_y" type="double" value="0.0" />
+    		<param name="carGPS_car_z" type="double" value="0.0" />
+			
+		<!-- camera to drone translation (m) : DJI X5S-->
+		<param name="m_camera_drone_x" type="double" value="0.0" />
+    		<param name="m_camera_drone_y" type="double" value="0.0" />
+    		<param name="m_camera_drone_z" type="double" value="0.0" />
+		<param name="s_camera_drone_x" type="double" value="0.0" />
+    		<param name="s_camera_drone_y" type="double" value="0.0" />
+    		<param name="s_camera_drone_z" type="double" value="0.0" />
+
+		<!-- camera to cameraNED translation (m) : DJI X5S-->
+		<param name="m_camera_cameraNED_x" type="double" value="0.0" />
+    		<param name="m_camera_cameraNED_y" type="double" value="0.0" />
+    		<param name="m_camera_cameraNED_z" type="double" value="0.0" />
+		<param name="s_camera_cameraNED_x" type="double" value="0.0" />
+    		<param name="s_camera_cameraNED_y" type="double" value="0.0" />
+    		<param name="s_camera_cameraNED_z" type="double" value="0.0" />
+    </node>
+
+    <!--MATRICE_02-->
+    <node pkg="drone_pose_estimation" type="double_drone_position_calculator" name="matrice_02_calculator" output="screen">
+        <!-- node parameters -->
+		<param name="enable_console_output"  type="bool" value="true" />
+		<param name="enable_rostopic_output" type="bool" value="true" />
+
+		<param name="master_state_ros_topic"  type="string" value="/matrice_02/info_sync_node/drone_state" />
+		<param name="slaver_state_ros_topic" type="string" value="/matrice_03/info_sync_node/drone_state" />
+		<param name="ground_target_state_ros_topic_" type="string" value="ground_state" />
+
+        <!-- camera intrinsic parameters : DJI X5S-->
+		<param name="m_camera_f" type="double" value="0.014722156" />
+    		<param name="m_camera_u0" type="double" value="640.0" />
+    		<param name="m_camera_v0" type="double" value="360.0" />
+		<param name="s_camera_f" type="double" value="0.014722156" />
+    		<param name="s_camera_u0" type="double" value="640.0" />
+    		<param name="s_camera_v0" type="double" value="360.0" />
+
+		<!-- camera distortion parameters : DJI X5S-->
+		<param name="m_camera_k1" type="double" value="-0.047904824" />
+    		<param name="m_camera_k2" type="double" value="0.0393172992" />
+    		<param name="m_camera_p1" type="double" value="0.0" />
+    		<param name="m_camera_p2" type="double" value="0.0" />
+		<param name="s_camera_k1" type="double" value="-0.047904824" />
+    		<param name="s_camera_k2" type="double" value="0.0393172992" />
+    		<param name="s_camera_p1" type="double" value="0.0" />
+    		<param name="s_camera_p2" type="double" value="0.0" />
+
+		<!-- car-GPS to car euler angles (rad) -->
+		<param name="carGPS_car_roll" type="double" value="0.0" />
+    		<param name="carGPS_car_pitch" type="double" value="0.0" />
+    		<param name="carGPS_car_yaw" type="double" value="0.0" />
+		<!-- car-GPS to car translation (m)-->
+		<param name="carGPS_car_x" type="double" value="0.0" />
+    		<param name="carGPS_car_y" type="double" value="0.0" />
+    		<param name="carGPS_car_z" type="double" value="0.0" />
+			
+		<!-- camera to drone translation (m) : DJI X5S-->
+		<param name="m_camera_drone_x" type="double" value="0.0" />
+    		<param name="m_camera_drone_y" type="double" value="0.0" />
+    		<param name="m_camera_drone_z" type="double" value="0.0" />
+		<param name="s_camera_drone_x" type="double" value="0.0" />
+    		<param name="s_camera_drone_y" type="double" value="0.0" />
+    		<param name="s_camera_drone_z" type="double" value="0.0" />
+
+		<!-- camera to cameraNED translation (m) : DJI X5S-->
+		<param name="m_camera_cameraNED_x" type="double" value="0.0" />
+    		<param name="m_camera_cameraNED_y" type="double" value="0.0" />
+    		<param name="m_camera_cameraNED_z" type="double" value="0.0" />
+		<param name="s_camera_cameraNED_x" type="double" value="0.0" />
+    		<param name="s_camera_cameraNED_y" type="double" value="0.0" />
+    		<param name="s_camera_cameraNED_z" type="double" value="0.0" />
+    </node>
+
+    <!--MATRICE_03-->
+    <node pkg="drone_pose_estimation" type="double_drone_position_calculator" name="matrice_03_calculator" output="screen">
+        <!-- node parameters -->
+		<param name="enable_console_output"  type="bool" value="true" />
+		<param name="enable_rostopic_output" type="bool" value="true" />
+
+		<param name="master_state_ros_topic"  type="string" value="/matrice_03/info_sync_node/drone_state" />
+		<param name="slaver_state_ros_topic" type="string" value="/matrice_01/info_sync_node/drone_state" />
+		<param name="ground_target_state_ros_topic_" type="string" value="ground_state" />
+
+        <!-- camera intrinsic parameters : DJI X5S-->
+		<param name="m_camera_f" type="double" value="0.014722156" />
+    		<param name="m_camera_u0" type="double" value="640.0" />
+    		<param name="m_camera_v0" type="double" value="360.0" />
+		<param name="s_camera_f" type="double" value="0.014722156" />
+    		<param name="s_camera_u0" type="double" value="640.0" />
+    		<param name="s_camera_v0" type="double" value="360.0" />
+
+		<!-- camera distortion parameters : DJI X5S-->
+		<param name="m_camera_k1" type="double" value="-0.047904824" />
+    		<param name="m_camera_k2" type="double" value="0.0393172992" />
+    		<param name="m_camera_p1" type="double" value="0.0" />
+    		<param name="m_camera_p2" type="double" value="0.0" />
+		<param name="s_camera_k1" type="double" value="-0.047904824" />
+    		<param name="s_camera_k2" type="double" value="0.0393172992" />
+    		<param name="s_camera_p1" type="double" value="0.0" />
+    		<param name="s_camera_p2" type="double" value="0.0" />
+
+		<!-- car-GPS to car euler angles (rad) -->
+		<param name="carGPS_car_roll" type="double" value="0.0" />
+    		<param name="carGPS_car_pitch" type="double" value="0.0" />
+    		<param name="carGPS_car_yaw" type="double" value="0.0" />
+		<!-- car-GPS to car translation (m)-->
+		<param name="carGPS_car_x" type="double" value="0.0" />
+    		<param name="carGPS_car_y" type="double" value="0.0" />
+    		<param name="carGPS_car_z" type="double" value="0.0" />
+			
+		<!-- camera to drone translation (m) : DJI X5S-->
+		<param name="m_camera_drone_x" type="double" value="0.0" />
+    		<param name="m_camera_drone_y" type="double" value="0.0" />
+    		<param name="m_camera_drone_z" type="double" value="0.0" />
+		<param name="s_camera_drone_x" type="double" value="0.0" />
+    		<param name="s_camera_drone_y" type="double" value="0.0" />
+    		<param name="s_camera_drone_z" type="double" value="0.0" />
+
+		<!-- camera to cameraNED translation (m) : DJI X5S-->
+		<param name="m_camera_cameraNED_x" type="double" value="0.0" />
+    		<param name="m_camera_cameraNED_y" type="double" value="0.0" />
+    		<param name="m_camera_cameraNED_z" type="double" value="0.0" />
+		<param name="s_camera_cameraNED_x" type="double" value="0.0" />
+    		<param name="s_camera_cameraNED_y" type="double" value="0.0" />
+    		<param name="s_camera_cameraNED_z" type="double" value="0.0" />
+    </node>
+
+</launch>

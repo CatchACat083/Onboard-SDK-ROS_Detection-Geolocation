@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <group ns="matrice_01">
+        <node pkg="drone_pose_estimation" type="single_drone_info_sync_node" name="info_sync_node" output="screen">
+            <!-- node parameters -->
+            <param name="pub_drone_state_ros_topic"  type="string" value="drone_state" />
+
+            <param name="sub_gps_ros_topic"  type="string" value="/matrice_01/dgps_node/dgps_fix_position" />
+            <param name="sub_attitude_ros_topic"  type="string" value="/matrice_01/vehicle_node/dji_osdk_ros/attitude" />
+            <param name="sub_gimbal_ros_topic"  type="string" value="/matrice_01/vehicle_node/dji_osdk_ros/gimbal_angle" />
+            <param name="sub_bbox_ros_topic"  type="string" value="/matrice_01/darknet_ros/bounding_boxes" />
+        </node>
+    </group>
+</launch>
