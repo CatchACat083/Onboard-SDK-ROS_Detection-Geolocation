@@ -23,18 +23,31 @@ One Demo Targets Detection and Geolocation With DJI@OSDK-ROS and darknet-ROS
 - ROS-Kientic + catkin 
 - Nmea-commons 
 ### 2.3. 代码的编译与运行 
-（1）将代码移入~/catkin_ws/src 
-  $ cd catkin_ws 
-  $ catkin_make 
+（1）将代码移入`~/catkin_ws/src `
+
+ ` $ cd catkin_ws `
+ 
+  `$ catkin_make` 
+  
 （2）将darknet目标检测的.weights文件和.cfg文件分别放入
-  ~/catkin_ws/src/darknet_ros/darknet_ros/yolo_network_config/weights
-  ~/catkin_ws/src/darknet_ros/darknet_ros/yolo_network_config/cfg
-同时修改~/catkin_ws/src/darknet_ros/darknet_ros/config/yolov4-tiny.yaml中的cfg、weights、threshold、classname。 
+
+  `~/catkin_ws/src/darknet_ros/darknet_ros/yolo_network_config/weights`
+  
+  `~/catkin_ws/src/darknet_ros/darknet_ros/yolo_network_config/cfg `
+  
+同时修改`~/catkin_ws/src/darknet_ros/darknet_ros/config/yolov4-tiny.yaml`中的cfg、weights、threshold、classname。 
 （3）正确连接并开启无人机，启动dji_osdk_ros节点 
-  $ roslaunch dji_osdk_ros my_vehicle_node.launch 
+
+`  $ roslaunch dji_osdk_ros my_vehicle_node.launch `
+
 启动定位运算节点 
-  $ roslaunch drone_pose_estimation single_drone_info_sync_node.launch 
-  $ roslaunch drone_pose_estimation single_drone_position_calculator.launch 
+
+  `$ roslaunch drone_pose_estimation single_drone_info_sync_node.launch `
+  
+`  $ roslaunch drone_pose_estimation single_drone_position_calculator.launch `
+
 ## 3.感谢 
+
 https://github.com/dji-sdk/Onboard-SDK-ROS 
+
 https://github.com/leggedrobotics/darknet_ros 
