@@ -1,4 +1,4 @@
-# OSDK-ROS_targetGeolocation
+# Onboard-SDK-ROS_targetGeolocation
 ## 1. 这是什么？ 
 
 One Demo Targets Detection and Geolocation With DJI@OSDK-ROS and darknet-ROS 
